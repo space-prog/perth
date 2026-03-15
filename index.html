@@ -1,118 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
+    <style>
+        /* ── NAV MENU ── */
+        .nav {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            column-gap: 0;
+        }
+ 
+        /* Desktop: горизонтальне меню, бургер прихований */
+        .nav-list {
+            display: flex;
+            align-items: center;
+            column-gap: 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+ 
+        .nav-list a {
+            color: #fff;
+            text-decoration: none;
+            font-family: "Proxima Nova Regular", sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+ 
+        .nav-list a:hover {
+            opacity: 1;
+        }
+ 
+        /* Burger — прихований на десктопі */
+        .burger {
+            display: none;
+            width: 30px;
+            height: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            z-index: 100;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 0;
+        }
+ 
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background-color: #fff;
+            position: absolute;
+            transition: transform 0.35s cubic-bezier(.4,0,.2,1),
+                        opacity 0.25s ease,
+                        top 0.35s cubic-bezier(.4,0,.2,1);
+        }
+ 
+        /* Початкові позиції 4 спанів */
+        .burger span:nth-child(1) { top: 4px; }
+        .burger span:nth-child(2) { top: 13px; }
+        .burger span:nth-child(3) { top: 13px; }
+        .burger span:nth-child(4) { top: 22px; }
+ 
+        /* Хрестик */
+        .burger.open span:nth-child(1) {
+            top: 13px;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+        .burger.open span:nth-child(2) {
+            top: 13px;
+            transform: rotate(45deg);
+        }
+        .burger.open span:nth-child(3) {
+            top: 13px;
+            transform: rotate(-45deg);
+        }
+        .burger.open span:nth-child(4) {
+            top: 13px;
+            transform: rotate(-45deg);
+            opacity: 0;
+        }
+ 
+        /* ── MOBILE ── */
+        @media screen and (max-width: 768px) {
+            .burger {
+                display: flex;
+                margin-left: auto;
+            }
+ 
+            .nav-list {
+                position: fixed;
+                top: -170px;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(13, 169, 229, 0.97);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                row-gap: 36px;
+                column-gap: 0;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+                z-index: 90;
+            }
+ 
+            .nav-list.open {
+                transform: translateX(0);
+            }
+ 
+            .nav-list a {
+                font-size: 22px;
+                opacity: 1;
+                letter-spacing: 2px;
+            }
+ 
+            .nav-list li {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+ 
+            .nav-list.open li:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:.1s }
+            .nav-list.open li:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:.18s }
+            .nav-list.open li:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:.26s }
+            .nav-list.open li:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:.34s }
+            .nav-list.open li:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:.42s }
+        }
+    </style>
 </head>
-
 <body>
-
-    <body>
-        <header>
-            <div class="wrapper">
-                <div class="flex">
-                    <div class="logo"></div>
-                    <div class="burger">
+    <header>
+        <div class="wrapper">
+            <div class="flex">
+                <div class="logo"></div>
+ 
+                <nav class="nav">
+                    <ul class="nav-list" id="navList">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+ 
+                    <button class="burger" id="burger" aria-label="Menu">
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
-                    </div>
-                </div>
-                <div class="basics">
-                    <div class="phone">
-                        <img src="img/iphone5.png" alt="iphone">
-                    </div>
-                    <div class="header-content">
-                        <p class="Weirdfont">Meet Perth,</p>
-                        <p class="secondText">A stupidly simple, flat PSD. Oh yeah, it’s <span>free</span> too!</p>
-                        <a class="download">
-                            <span>DOWNLOAD</span>
-                            <img src="img/cloud_download_24dp_FFFFFF.png" alt="download icon">
-                        </a>
-                    </div>
-                </div>
+                    </button>
+                </nav>
             </div>
-        </header>
-
-        <main>
-            <div class="wrapper minheight relative">
-                <div class="mainTextLeft">
-                    <h2>A Longwinded Header</h2>
-                    <p>She'll be right paddock how lets throw a ciggies. She'll be right ute to built like a doovalacky.
-                        We're going rack off bloody she'll be right pash. You little ripper tucker also get a dog up ya
-                        greenie.
-                    </p>
-                    <div class="flex cgMain">
-                        <div class="line"></div>
-                        <p>You little ripper boozer no worries she'll be right holy dooley!. Come a
-                            freo also as cross as a your shout. Lets throw a khe sanh flamin dead
-                            dingo's donger. Lets get some fisho with grab us a trackie dacks.</p>
-                    </div>
-                    <a href="#">
-                        Say hello
-                        <img src="img/mail_24dp_14AF8F.png" alt="mail icon">
+ 
+            <div class="basics">
+                <div class="phone">
+                    <img src="img/iphone5.png" alt="iphone">
+                </div>
+                <div class="header-content">
+                    <p class="Weirdfont">Meet Perth,</p>
+                    <p class="secondText">A stupidly simple, flat PSD. Oh yeah, it's <span>free</span> too!</p>
+                    <a class="download">
+                        <span>DOWNLOAD</span>
+                        <img src="img/cloud_download_24dp_FFFFFF.png" alt="download icon">
                     </a>
                 </div>
-                <div class="mainImg"><img src="img/ipadflat.png" alt="ipad"></div>
             </div>
-            <div class="next-section relative">
-                <div class="wrapper minheight flex sdfgdsf">
-                    <div class="devices"><img src="img/devices.png" alt=""></div>
-                    <div class="flex textNext">
-                        <h2>Get a Dog Up Ya’</h2>
-                        <div>
-                            <p class="maxheightttt">She'll be right paddock how lets throw a ciggies.
-                                She'll be right ute to built like a doovalacky.
-                            </p>
-                            <p class="maxheightttt">
-                                We're going rack off bloody she'll be right pash. You
-                                little ripper tucker also get a dog up ya greenie.
-                            </p>
-                        </div>
-                        <a href="#" class="nextBtn">
-                            View on Dribbble
-                            <img src="img/sports_basketball_24dp_EA4C89_FILL0_wght300_GRAD0_opsz24.png" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="buyCoffee relative">
-                <p>Like What You See?</p>
-                <a href="#">Buy me a<span> beer?</span></a>
-            </div>
-        </main>
-        <footer>
-            <div class="footerIcons">
-                <a href="#" class="footerIcon">
-                    <img src="img/dribble icon.png" alt="">
-                </a>
-                <a href="#" class="footerIcon">
-                    <img src="img/facebook icon.png" alt="">
-                </a>
-                <a href="#" class="footerIcon">
-                    <img src="img/twitter icon.png" alt="">
-                </a>
-                <a href="#" class="footerIcon">
-                    <img src="img/paperplane.png" alt="">
-                </a>
-            </div>
-            <div class="FooterEmail">
-                <p class="EmailText">Newsletter Subscription</p>
-                <div class="relative flex">
-                    <input type="text" name="" id="" class="emailInput" placeholder="Enter Email">
-                    <span></span>
-                    <img src="img/icon.png" alt="emailicon">
-                </div>
-            </div>
-        </footer>
-        <div class="footer2">
-            <p>© 2013 <span>Perth.</span> Breeding pixels since the naughties.</p>
         </div>
-    </body>
+    </header>
+ 
+    <main>
+        <div class="wrapper minheight relative">
+            <div class="mainTextLeft">
+                <h2>A Longwinded Header</h2>
+                <p>She'll be right paddock how lets throw a ciggies. She'll be right ute to built like a doovalacky.
+                    We're going rack off bloody she'll be right pash. You little ripper tucker also get a dog up ya greenie.
+                </p>
+                <div class="flex cgMain">
+                    <div class="line"></div>
+                    <p>You little ripper boozer no worries she'll be right holy dooley!. Come a
+                        freo also as cross as a your shout. Lets throw a khe sanh flamin dead
+                        dingo's donger. Lets get some fisho with grab us a trackie dacks.</p>
+                </div>
+                <a href="mailto:p87717891@gmail.com">
+                    Say hello
+                    <img src="img/mail_24dp_14AF8F.png" alt="mail icon">
+                </a>
+            </div>
+            <div class="mainImg"><img src="img/ipadflat.png" alt="ipad"></div>
+        </div>
+        <div class="next-section relative">
+            <div class="wrapper minheight flex sdfgdsf">
+                <div class="devices"><img src="img/devices.png" alt=""></div>
+                <div class="flex textNext">
+                    <h2>Get a Dog Up Ya'</h2>
+                    <div>
+                        <p class="maxheightttt">She'll be right paddock how lets throw a ciggies.
+                            She'll be right ute to built like a doovalacky.
+                        </p>
+                        <p class="maxheightttt">
+                            We're going rack off bloody she'll be right pash. You
+                            little ripper tucker also get a dog up ya greenie.
+                        </p>
+                    </div>
+                    <a href="https://dribbble.com/" class="nextBtn">
+                        View on Dribbble
+                        <img src="img/sports_basketball_24dp_EA4C89_FILL0_wght300_GRAD0_opsz24.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="buyCoffee relative">
+            <p>Like What You See?</p>
+            <a href="https://minuman.com/cdn/shop/articles/Everything-You-Need-to-Know-About-Beer-2_84f4045b-b7e1-4b56-a72b-46b79b065088.jpg?v=1758167419">Buy me a<span> beer?</span></a>
+        </div>
+    </main>
+ 
+    <footer>
+        <div class="footerIcons">
+            <a href="https://dribbble.com/" class="footerIcon"><img src="img/dribble icon.png" alt=""></a>
+            <a href="https://facebook.com" class="footerIcon"><img src="img/facebook icon.png" alt=""></a>
+            <a href="https://twitter.com" class="footerIcon"><img src="img/twitter icon.png" alt=""></a>
+            <a href="https://t.me/VikaKurachka" class="footerIcon"><img src="img/paperplane.png" alt=""></a>
+        </div>
+        <div class="FooterEmail">
+            <p class="EmailText">Newsletter Subscription</p>
+            <div class="relative flex">
+                <input type="text" class="emailInput" placeholder="Enter Email">
+                <span></span>
+                <img src="img/icon.png" alt="emailicon">
+            </div>
+        </div>
+    </footer>
+    <div class="footer2">
+        <p>© 2013 <span>Perth.</span> Breeding pixels since the naughties.</p>
+    </div>
+ 
+    <script>
+        const burger = document.getElementById('burger');
+        const navList = document.getElementById('navList');
+ 
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('open');
+            navList.classList.toggle('open');
+            document.body.style.overflow = navList.classList.contains('open') ? 'hidden' : '';
+        });
+ 
+        // Закрити меню при кліку на посилання
+        navList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('open');
+                navList.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
 </body>
-
 </html>
